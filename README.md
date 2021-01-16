@@ -5,6 +5,5 @@ To use effectively this you should clone my QMK fork and then add keyboards and 
 ```
 git clone https://github.com/louckousse/qmk_firmware.git
 cd qmk_firmware
-mkdir keyboards
-git clone https://github.com/louckousse/keymaps.git
+git clone https://github.com/louckousse/keymaps.git keyboards
 ```
