@@ -37,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [NAVMT] = LAYOUT_kyria_pretty_wrapper(
       XXXXXXX, __________________NAV_L1___________________,                                     ___________________BLANK___________________, XXXXXXX,
       XXXXXXX, __________________NAV_L2___________________,                                     ___________________MOD_R___________________, XXXXXXX,
-      XXXXXXX, __________________NAV_L3___________________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GO_SC2,  GO_GAME, KC_OS,   KC_ALGR, _______, XXXXXXX,
+      XXXXXXX, __________________NAV_L3___________________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GO_SC2,  GO_GAME, KC_OS,   KC_ALGR, GO_CMK,  XXXXXXX,
                                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, KC_SPC,  KC_TAB,  XXXXXXX, XXXXXXX
     ),
 
@@ -53,6 +53,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       XXXXXXX, ___________________MOD_L___________________,                                     ________________NUMBER_L2__________________, XXXXXXX,
       XXXXXXX, _______, KC_ALGR, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ________________NUMBER_L3__________________,  XXXXXXX,
                                  XXXXXXX, XXXXXXX, _______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX
+    ),
+
+    [CMK] = LAYOUT_kyria_pretty_wrapper(
+      KC_TAB,  ______________COLEMAK_DH_L1________________,                                     ______________COLEMAK_DH_R1________________, KC_CIRC,
+      KC_ESC,  ______________COLEMAK_DH_L2________________,                                     ______________COLEMAK_DH_R2________________, KC_QUOT,
+      KC_CAPS, ______________COLEMAK_DH_L3________________, KC_RALT, GO_BASE, PRINT,   KC_OS,   ______________COLEMAK_DH_R3________________, KC_GRV,
+                                 KC_MPLY, ALT_BO,  CTRL_MN, ST_ENT,  RSE_DEL, LWR_BSP, ST_SPC,  KC_RCTL, ALT_BE,  KC_LGUI
     ),
 
     [SC2_B] = LAYOUT(

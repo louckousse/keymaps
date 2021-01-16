@@ -111,6 +111,7 @@ static void render_default(void) {
     oled_write_P(PSTR("Layout: "), false);
     switch (get_highest_layer(default_layer_state)) {
         case CMT: oled_write_P(PSTR("Mod Tap\n"), false); break;
+        case CMK: oled_write_P(PSTR("Colemak\n"), false); break;
         case SC2_B: oled_write_P(PSTR("For the swarm"), false); break;
         case GAME_B: oled_write_P(PSTR("SHOOT\n"), false); break;
         default: oled_write_P(PSTR("That's weird\n"), false);
