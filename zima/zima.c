@@ -14,38 +14,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "zima.h"
+#include <stdio.h>
 
-// Optional override functions below.
-// You can leave any or all of these undefined.
-// These are only required if you want to perform custom actions.
+#ifdef HAPTIC_ENABLE
+#    include "haptic.h"
+extern haptic_config_t haptic_config;
+#endif
 
-/*
+static bool is_asleep = false;
+static uint32_t oled_timer;
 
-void matrix_init_kb(void) {
-  // put your keyboard start-up code here
-  // runs once when the firmware starts up
-
-  matrix_init_user();
+__attribute__((weak)) void encoder_update_user(uint8_t index, bool clockwise) {
+    if (clockwise) {
+        tap_code16(KC_VOLU);
+    } else {
+        tap_code16(KC_VOLD);
+    }
+    oled_timer = timer_read32();
+#if defined(AUDIO_ENABLE) && defined(AUDIO_CLICKY)
+    if (is_audio_on() && is_clicky_on()) clicky_play();
+#endif
+#ifdef HAPTIC_ENABLE
+    if (haptic_config.enable) haptic_play();
+#endif
 }
-
-void matrix_scan_kb(void) {
-  // put your looping keyboard code here
-  // runs every cycle (a lot)
-
-  matrix_scan_user();
-}
-
-bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
-  // put your per-action keyboard code here
-  // runs for every action, just before processing by the firmware
-
-  return process_record_user(keycode, record);
-}
-
-void led_set_kb(uint8_t usb_led) {
-  // put your keyboard LED indicator (ex: Caps Lock LED) toggling code here
-
-  led_set_user(usb_led);
-}
-
-*/

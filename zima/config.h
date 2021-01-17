@@ -1,16 +1,13 @@
 /*
 Copyright 2019 Thomas Baart
-
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 (at your option) any later version.
-
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -21,11 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID 0xFEED
-#define PRODUCT_ID 0x0000
+#define PRODUCT_ID 0xF75B
 #define DEVICE_VER 0x0001
 #define MANUFACTURER splitkb
 #define PRODUCT Zima
-#define DESCRIPTION A twelve key macropad
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -40,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     { E6, F5, F6 }, \
     { F0, F1, F4 } \
 }
+
 #define UNUSED_PINS
 
 #define ENCODERS_PAD_A { B4 }
@@ -47,32 +44,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // #define QMK_ESC_OUTPUT B7
 // #define QMK_ESC_INPUT C6
-#define QMK_SPEAKER B6
+// #define QMK_SPEAKER B6
 
 #define B6_AUDIO
+#define NO_MUSIC_MODE
 
 #define RGB_DI_PIN B5
-#ifdef RGB_DI_PIN
-  #define RGBLED_NUM 5
-  #define RGBLIGHT_LIMIT_VAL 255 /* The maximum brightness level */
-  #define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
-#endif
+#define RGBLED_NUM 5
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 5
 
-// #define FB_ERM_LRA 1
-// #define FB_BRAKEFACTOR 3 /* For 1x:0, 2x:1, 3x:2, 4x:3, 6x:4, 8x:5, 16x:6, Disable Braking:7 */
-// #define FB_LOOPGAIN 1 /* For  Low:0, Medium:1, High:2, Very High:3 */
+/* define if matrix has ghost (lacks anti-ghosting diodes) */
+//#define MATRIX_HAS_GHOST
+
+/* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
+// #define LOCKING_SUPPORT_ENABLE
+/* Locking resynchronize hack */
+// #define LOCKING_RESYNC_ENABLE
+
+#define FB_ERM_LRA 0
+#define FB_BRAKEFACTOR 3 /* For 1x:0, 2x:1, 3x:2, 4x:3, 6x:4, 8x:5, 16x:6, Disable Braking:7 */
+#define FB_LOOPGAIN 1    /* For  Low:0, Medium:1, High:2, Very High:3 */
 
 /* Please refer to your datasheet for the optimal setting for your specific motor. */
-// #define RATED_VOLTAGE 2
-// #define V_PEAK 2.8
-// #define V_RMS 2.1
-// #define F_LRA 205 /* resonance freq */
+#define RATED_VOLTAGE 3
+#define V_PEAK 5
 
-// #define DRV_GREETING 15 // alert_750ms
-
+#define DRV_GREETING alert_750ms
+#define DRV_MODE_DEFAULT buzz
 // EC11K encoders have a different resolution than other EC11 encoders.
 // When using the default resolution of 4, if you notice your encoder skipping
 // every other tick, lower the resolution to 2.

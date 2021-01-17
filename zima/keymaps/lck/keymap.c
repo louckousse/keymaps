@@ -1,28 +1,30 @@
 #include QMK_KEYBOARD_H
 #include <stdio.h>
+extern haptic_config_t haptic_config;
 
 enum layers {
     MED = 0,
     LED,
-    KCD
+    CFG
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MED] = LAYOUT(
-        TO(KCD), KC_WBAK, AU_TOG,
+        TO(LED), XXXXXXX, XXXXXXX,
         RGB_HUI, RGB_SAI, KC_VOLU,
         KC_LSFT, KC_MUTE, KC_VOLD,
         KC_MPRV, KC_MPLY, KC_MNXT),
-    [KCD] = LAYOUT(
-        TO(LED), C(KC_M), C(S(KC_M)),
-        A(KC_1), A(KC_2), A(KC_3),
-        KC_V,    KC_R,    KC_F,
-        KC_X,    KC_M,    KC_E   ),
     [LED] = LAYOUT(
-        TO(MED), RGB_TOG,  KC_WFWD,
+        TO(CFG), RGB_TOG,  KC_WFWD,
         RGB_HUI, RGB_SAI,  RGB_VAI,
         RGB_HUD, RGB_SAD,  RGB_VAD,
-        RGB_MOD, RGB_RMOD, KC_MNXT)
+        RGB_MOD, RGB_RMOD, KC_MNXT),
+    [CFG] = LAYOUT(
+        TO(MED), HPT_TOG, AU_TOG,
+        _______, _______, XXXXXXX,
+        CK_TOGG, _______, _______,
+        _______, _______, _______
+    ),
 };
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
@@ -55,9 +57,12 @@ static void display_led_layer(void) {
     oled_write_ln(hsvVal, false);
 }
 
-static void display_kcd_layer(void) {
-    oled_write_P(PSTR("You're a designer?\n"), false);
-    display_empty_line(3);
+static void display_cfg_layer(void) {
+    oled_write_P(PSTR("Config Time!\n"), false);
+    oled_write_P(PSTR("Audio:"), false);
+    is_audio_on() ? oled_write_P(PSTR(" on\n"), false) : oled_write_P(PSTR("off\n"), false);
+    oled_write_P(PSTR("Haptic:"), false);
+    haptic_config.enable ? oled_write_P(PSTR(" on\n"), false) : oled_write_P(PSTR("off\n"), false);
 }
 
 
@@ -70,8 +75,8 @@ static void render_layer_status(void) {
         case LED:
             display_led_layer();
             break;
-        case KCD:
-            display_kcd_layer();
+        case CFG:
+            display_cfg_layer();
             break;
         default:
             oled_write_P(PSTR("Base\n"), false);
@@ -91,8 +96,10 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (clockwise) {
             tap_code(KC_VOLU);
+            haptic_play();
         } else {
             tap_code(KC_VOLD);
+            haptic_play();
         }
     }
 }
