@@ -37,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [NAVMT] = LAYOUT_kyria_pretty_wrapper(
       XXXXXXX, __________________NAV_L1___________________,                                     ___________________BLANK___________________, XXXXXXX,
       XXXXXXX, __________________NAV_L2___________________,                                     ___________________MOD_R___________________, XXXXXXX,
-      XXXXXXX, __________________NAV_L3___________________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GO_SC2,  GO_GAME, KC_OS,   KC_ALGR, GO_CMK,  XXXXXXX,
+      XXXXXXX, __________________NAV_L3___________________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, KC_OS,   KC_ALGR, GO_CMK,  XXXXXXX,
                                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, KC_SPC,  KC_TAB,  XXXXXXX, XXXXXXX
     ),
 
@@ -60,33 +60,5 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_ESC,  ______________COLEMAK_DH_L2________________,                                     ______________COLEMAK_DH_R2________________, KC_QUOT,
       KC_CAPS, ______________COLEMAK_DH_L3________________, KC_RALT, GO_BASE, PRINT,   KC_OS,   ______________COLEMAK_DH_R3________________, KC_GRV,
                                  KC_MPLY, ALT_BO,  CTRL_MN, ST_ENT,  RSE_DEL, LWR_BSP, ST_SPC,  KC_RCTL, ALT_BE,  KC_LGUI
-    ),
-
-    [SC2_B] = LAYOUT(
-      KC_TAB,  KC_Q,   KC_W,     KC_E,    KC_R,    KC_T,                                        KC_GL,   _______, KC_GG,   _______, _______, _______,
-      KC_ESC,  KC_A,   KC_S,     KC_D,    KC_F,    KC_G,                                        _______, _______, _______, _______, _______, _______,
-      KC_LSFT, KC_Z,   KC_X,     KC_C,    KC_V,    KC_B,    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                                 _______, KC_TAB,  KC_2,    KC_5,  MO(SC2_L), _______, _______, _______, _______, _______
-    ),
-
-    [SC2_L] = LAYOUT(
-      _______, KC_GRV,  KC_7,     KC_8,    KC_9,    KC_F1,                                       _______, _______, _______, _______, _______, _______,
-      _______, _______, KC_4,     KC_5,    KC_6,    KC_F2,                                       _______, _______, _______, _______, _______, _______,
-      _______, KC_LCTL, KC_1,     KC_2,    KC_3,    KC_F3,   _______, _______, _______, _______, _______, _______, _______, _______, GO_BASE, _______,
-                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-    ),
-
-    [GAME_B] = LAYOUT(
-      KC_TAB,  _______, KC_Q,    KC_W,    KC_E,    KC_R,                                        _______, _______, _______, _______, _______, _______,
-      KC_ESC,  KC_G,    KC_A,    KC_S,    KC_D,    KC_F,                                        _______, _______, _______, _______, _______, _______,
-      KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_C,    _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                                 _______, KC_C, LT(GAME_L, KC_ENT), KC_LSFT, KC_SPC,  _______, _______, _______, _______, _______
-    ),
-
-    [GAME_L] = LAYOUT(
-      KC_N,    KC_F1,   KC_4,     KC_5,    KC_6,    KC_LALT,                                     _______, _______, _______, _______, _______, _______,
-      KC_Y,    KC_F2,   KC_1,     KC_2,    KC_3,    KC_J,                                        _______, _______, _______, _______, _______, _______,
-      KC_P,    KC_F3,   KC_7,     KC_8,    KC_9,    KC_M,    _______, _______, XXXXXXX, _______, _______, _______, _______, _______, GO_BASE, _______,
-                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 };
