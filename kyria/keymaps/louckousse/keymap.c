@@ -24,7 +24,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       XXXXXXX, ______________COLEMAK_DH_MT_L1_____________,                                     ______________COLEMAK_DH_MT_R1_____________,  KC_CIRC,
       XXXXXXX, ______________COLEMAK_DH_MT_L2_____________,                                     ______________COLEMAK_DH_MT_R2_____________,  KC_QUOT,
       XXXXXXX, ______________COLEMAK_DH_MT_L3_____________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ______________COLEMAK_DH_MT_R3_____________,  KC_GRV,
-                                 XXXXXXX, XXXXXXX, KC_ESC,  FUN_ENT, NAV_DEL, SYM_BSP, NUM_SPC, KC_MINS, XXXXXXX, XXXXXXX
+                                 XXXXXXX, XXXXXXX, MSE_ESC, FUN_ENT, NAV_DEL, SYM_BSP, NUM_SPC, KC_MINS, XXXXXXX, XXXXXXX
+    ),
+
+    [MSE] = LAYOUT_kyria_pretty_wrapper(
+      XXXXXXX, ________________MOUSE_KEY_L1_______________,                                     ___________________BLANK___________________, XXXXXXX,
+      XXXXXXX, ________________MOUSE_KEY_L2_______________,                                     ___________________MOD_R___________________, XXXXXXX,
+      XXXXXXX, ________________MOUSE_KEY_L3_______________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, KC_ALGR, _______, XXXXXXX,
+                                 XXXXXXX, XXXXXXX, _______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX
     ),
 
     [FUNMT] = LAYOUT_kyria_pretty_wrapper(

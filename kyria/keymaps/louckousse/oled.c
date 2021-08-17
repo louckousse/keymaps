@@ -3,31 +3,56 @@
 #include <stdio.h>
 #include "louckousse.h"
 #include "luna.c"
-// #include "bongocat.c"
+#include "bongocat.c"
 
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    return OLED_ROTATION_180;
-}
+oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
 
 static void render_default(void) {
     oled_write_P(PSTR("Layout: "), false);
     switch (get_highest_layer(default_layer_state)) {
-        case CMT: oled_write_P(PSTR("Mod Tap\n"), false);break;
-        case CMK: oled_write_P(PSTR("Colemak\n"), false); break;
-        default: oled_write_P(PSTR("That's weird\n"), false);
+        case CMT:
+            oled_write_P(PSTR("Mod Tap\n"), false);
+            break;
+        case CMK:
+            oled_write_P(PSTR("Colemak\n"), false);
+            break;
+        default:
+            oled_write_P(PSTR("That's weird\n"), false);
     }
 }
 
 static void render_layer_status(void) {
     oled_write_P(PSTR("Layer:  "), false);
     switch (get_highest_layer(layer_state)) {
-        // case SC2_L: oled_write_P(PSTR("Select unit\n"), false); break;
-        // case GAME_L: oled_write_P(PSTR("Change weapon"), false); break;
-        case NAVMT: oled_write_P(PSTR("Navigation\n"), false); break;
-        case FUNMT: oled_write_P(PSTR("Function\n"), false); break;
-        case SYMMT: oled_write_P(PSTR("Symbol\n"), false); break;
-        case NUMMT: oled_write_P(PSTR("Number\n"), false); break;
-        default: oled_write_P(PSTR("Base\n"), false);
+        case NAVMT:
+            oled_write_P(PSTR("Navigation\n"), false);
+#ifdef TRACKBALL_MATRIX_ROW
+            trackball_sethsv(11, 176, 150);
+#endif
+            break;
+        case FUNMT:
+            oled_write_P(PSTR("Function\n"), false);
+#ifdef TRACKBALL_MATRIX_ROW
+            trackball_sethsv(128, 255, 128);
+#endif
+            break;
+        case SYMMT:
+            oled_write_P(PSTR("Symbol\n"), false);
+#ifdef TRACKBALL_MATRIX_ROW
+            trackball_sethsv(234, 128, 150);
+#endif
+            break;
+        case NUMMT:
+            oled_write_P(PSTR("Number\n"), false);
+#ifdef TRACKBALL_MATRIX_ROW
+            trackball_sethsv(191, 255, 150);
+#endif
+            break;
+        default:
+            oled_write_P(PSTR("Base\n"), false);
+#ifdef TRACKBALL_MATRIX_ROW
+            trackball_sethsv(235, 200, 100);
+#endif
     }
 }
 
@@ -51,16 +76,6 @@ static void render_os(void) {
     }
 }
 
-static void render_hsv(void) {
-    char hsv[32] = "HSV:    ";
-    write_int_to_string(hsv, rgblight_get_hue());
-    strcat(hsv, " ");
-    write_int_to_string(hsv, rgblight_get_sat());
-    strcat(hsv, " ");
-    write_int_to_string(hsv, rgblight_get_val());
-    oled_write_ln(hsv, false);
-}
-
 char wpm_str[10];
 
 void oled_task_user(void) {
@@ -68,12 +83,16 @@ void oled_task_user(void) {
         render_default();
         render_layer_status();
         render_os();
-        render_hsv();
         animate_luna();
     } else {
-        // animate_bongocat();
-        oled_set_cursor(0,7);
-        sprintf(wpm_str, "          %03d", get_current_wpm());
+        animate_bongocat();
+        oled_set_cursor(0, 7);
+        uint8_t n  = get_current_wpm();
+        wpm_str[3] = '\0';
+        wpm_str[2] = '0' + n % 10;
+        wpm_str[1] = '0' + (n /= 10) % 10;
+        wpm_str[0] = '0' + n / 10;
+        oled_write_P(PSTR("          "), false);
         oled_write(wpm_str, false);
     }
 }

@@ -9,8 +9,8 @@
 
 #define ANIM_FRAME_DURATION 200 // how long each frame lasts in ms
 
-uint32_t anim_timer = 0;
-uint32_t anim_sleep = 0;
+uint32_t anim_timer_b = 0;
+uint32_t anim_sleep_b = 0;
 uint8_t current_idle_frame = 0;
 uint8_t current_tap_frame = 0;
 
@@ -80,17 +80,17 @@ static void animate_bongocat(void) {
   if(get_current_wpm() != 0) {
         oled_on(); // not essential but turns on animation OLED with any alpha keypress
 
-        if(timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-            anim_timer = timer_read32();
+        if(timer_elapsed32(anim_timer_b) > ANIM_FRAME_DURATION) {
+            anim_timer_b = timer_read32();
             animation_phase();
         }
-        anim_sleep = timer_read32();
+        anim_sleep_b = timer_read32();
     } else {
-        if(timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
+        if(timer_elapsed32(anim_sleep_b) > OLED_TIMEOUT) {
             oled_off();
         } else {
-            if(timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-                anim_timer = timer_read32();
+            if(timer_elapsed32(anim_timer_b) > ANIM_FRAME_DURATION) {
+                anim_timer_b = timer_read32();
                 animation_phase();
             }
         }

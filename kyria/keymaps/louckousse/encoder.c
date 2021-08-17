@@ -34,37 +34,17 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
                 break;
             default:
-                if (((keyboard_report->mods & MOD_BIT(KC_LSFT)))) {
-                    if (!clockwise) {
-                        rgblight_increase_hue();
+                if (clockwise) {
+                    if (user_config.osIsLinux) {
+                        tap_code16(C(A(KC_LEFT)));
                     } else {
-                        rgblight_decrease_hue();
-                    }
-                } else if ((keyboard_report->mods & MOD_BIT(KC_LCTL))) {
-                    if (!clockwise) {
-                        rgblight_increase_sat();
-                    } else {
-                        rgblight_decrease_sat();
-                    }
-                } else if ((keyboard_report->mods & MOD_BIT(KC_LALT))) {
-                    if (!clockwise) {
-                        rgblight_increase_val();
-                    } else {
-                        rgblight_decrease_val();
+                        tap_code16(C(G(KC_LEFT)));
                     }
                 } else {
-                    if (clockwise) {
-                        if (user_config.osIsLinux) {
-                            tap_code16(C(A(KC_LEFT)));
-                        } else {
-                            tap_code16(C(G(KC_LEFT)));
-                        }
+                    if (user_config.osIsLinux) {
+                        tap_code16(C(A(KC_RIGHT)));
                     } else {
-                        if (user_config.osIsLinux) {
-                            tap_code16(C(A(KC_RIGHT)));
-                        } else {
-                            tap_code16(C(G(KC_RIGHT)));
-                        }
+                        tap_code16(C(G(KC_RIGHT)));
                     }
                 }
         }
