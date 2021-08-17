@@ -16,8 +16,6 @@
 #include QMK_KEYBOARD_H
 #include "louckousse.h"
 
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [CMT] = LAYOUT_kyria_pretty_wrapper(

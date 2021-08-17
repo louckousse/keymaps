@@ -25,12 +25,6 @@
 
 #define RGBLIGHT_DISABLE_KEYCODES
 
-// EC11K encoders have a different resolution than other EC11 encoders.
-// When using the default resolution of 4, if you notice your encoder skipping
-// every other tick, lower the resolution to 2.
-#define ENCODER_RESOLUTION 2
-
-
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness
 #define EE_HANDS
@@ -44,8 +38,6 @@
 #define TAPPING_FORCE_HOLD        // Enable rapid switch from tap to hold, disables double tap hold auto-repeat
 #define PERMISSIVE_HOLD           // Apply the modifier on keys that are tapped during a short hold of a modtap
 #define TAPPING_TERM 200
-
-#define TRA
 
 // TrackBall
 #define TRACKBALL_MATRIX_ROW 6
