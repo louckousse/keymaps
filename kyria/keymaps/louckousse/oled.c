@@ -76,6 +76,12 @@ static void render_os(void) {
     }
 }
 
+static void render_wpm(void) {
+    char num[32] = "WPM:       ";
+    write_int_to_string(num, get_current_wpm());
+    oled_write_ln(num, false);
+}
+
 char wpm_str[10];
 
 void oled_task_user(void) {
@@ -83,6 +89,7 @@ void oled_task_user(void) {
         render_default();
         render_layer_status();
         render_os();
+        render_wpm();
         animate_luna();
     } else {
         animate_bongocat();
