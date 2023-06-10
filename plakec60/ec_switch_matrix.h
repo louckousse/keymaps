@@ -1,4 +1,4 @@
-/* Copyright 2019 Thomas Baart
+/* Copyright 2022 Cipulot
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,17 +13,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #pragma once
 
-#include "quantum.h"
+#include <stdint.h>
+#include <stdbool.h>
 
-#define LAYOUT_ortho_4x3( \
-    k00, k01, k02, \
-    k03, k04, k05, \
-    k06, k07, k08, \
-    k09, k10, k11  \
-   ) { \
-    {k00, k01, k02}, \
-    {k03, k04, k05}, \
-    {k06, k07, k08}, \
-    {k09, k10, k11} }
+#include "matrix.h"
+
+typedef struct {
+    uint16_t low_threshold_matrix[MATRIX_ROWS][MATRIX_COLS];  // threshold for key release
+    uint16_t high_threshold_matrix[MATRIX_ROWS][MATRIX_COLS]; // threshold for key press
+    uint16_t offset_matrix[MATRIX_ROWS][MATRIX_COLS];         // threshold for key press
+} ecsm_config_t;
+
+int  ecsm_init(ecsm_config_t const* const ecsm_config);
+bool ecsm_matrix_scan(matrix_row_t current_matrix[]);
+void ecsm_print_matrix(void);

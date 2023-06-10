@@ -9,17 +9,17 @@ enum layers {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [MED] = LAYOUT(
+    [MED] = LAYOUT_ortho_4x3(
         TO(LED), XXXXXXX, XXXXXXX,
-        RGB_HUI, RGB_SAI, KC_VOLU,
-        KC_LSFT, KC_MUTE, KC_VOLD,
+        C(KC_F11), RGB_SAI, KC_VOLU,
+        C(KC_F12), KC_MUTE, KC_VOLD,
         KC_MPRV, KC_MPLY, KC_MNXT),
-    [LED] = LAYOUT(
+    [LED] = LAYOUT_ortho_4x3(
         TO(CFG), RGB_TOG,  KC_WFWD,
         RGB_HUI, RGB_SAI,  RGB_VAI,
         RGB_HUD, RGB_SAD,  RGB_VAD,
         RGB_MOD, RGB_RMOD, KC_MNXT),
-    [CFG] = LAYOUT(
+    [CFG] = LAYOUT_ortho_4x3(
         TO(MED), HPT_TOG, AU_TOG,
         _______, _______, XXXXXXX,
         CK_TOGG, _______, _______,
@@ -84,7 +84,7 @@ static void render_layer_status(void) {
     }
 }
 
-void oled_task_user(void) { render_layer_status(); }
+bool oled_task_user(void) { render_layer_status(); return false; }
 
 void matrix_init_user(void) {}
 
@@ -92,14 +92,14 @@ void matrix_scan_user(void) {}
 
 void led_set_user(uint8_t usb_led) {}
 
-void encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) {
-        if (clockwise) {
-            tap_code(KC_VOLU);
-            haptic_play();
-        } else {
-            tap_code(KC_VOLD);
-            haptic_play();
-        }
-    }
-}
+// void encoder_update_user(uint8_t index, bool clockwise) {
+//     if (index == 0) {
+//         if (clockwise) {
+//             tap_code(KC_VOLU);
+//             haptic_play();
+//         } else {
+//             tap_code(KC_VOLD);
+//             haptic_play();
+//         }
+//     }
+// }

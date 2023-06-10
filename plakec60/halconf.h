@@ -1,4 +1,4 @@
-/* Copyright 2019 Thomas Baart
+/* Copyright 2022 Cipulot
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,17 +13,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #pragma once
 
-#include "quantum.h"
+#define HAL_USE_ADC TRUE
 
-#define LAYOUT_ortho_4x3( \
-    k00, k01, k02, \
-    k03, k04, k05, \
-    k06, k07, k08, \
-    k09, k10, k11  \
-   ) { \
-    {k00, k01, k02}, \
-    {k03, k04, k05}, \
-    {k06, k07, k08}, \
-    {k09, k10, k11} }
+#include_next <halconf.h>
